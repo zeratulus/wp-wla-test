@@ -7,6 +7,23 @@ function customizations( $wp_customize ) {
 		'priority' => 0,
 	) );
 
+	$wp_customize->add_setting( 'theme_logo', array(
+		'default' => get_theme_file_uri('images/logo.png'),
+		'sanitize_callback' => 'esc_url_raw'
+	));
+
+	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'logo_control', array(
+		'label' => 'Upload Logo',
+		'priority' => 0,
+		'section' => 'main_settings',
+		'settings' => 'theme_logo',
+		'button_labels' => [
+			'select' => 'Select Logo',
+			'remove' => 'Remove Logo',
+			'change' => 'Change Logo',
+		]
+	)));
+
 	$wp_customize->add_setting( 'google_maps_api_key' );
 	$wp_customize->add_control( 'google_maps_api_key', array(
 		'id'      => 'google_maps_api_key',
